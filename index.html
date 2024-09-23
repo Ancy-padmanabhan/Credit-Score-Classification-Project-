@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+         background-image: url('static/images/image.jpg');
+         background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;
+         color: white; /* Optional */
+        }
+     </style>
+     <script>
+     
+     document.addEventListener('DOMContentLoaded', function() {
+         // List of occupations
+         const occupations = ['Scientist', 'Teacher', 'Engineer', 'Entrepreneur', 'Developer', 
+             'Lawyer', 'Media_Manager', 'Doctor', 'Journalist', 'Manager', 
+             'Accountant', 'Musician', 'Mechanic', 'Writer', 'Architect'];
+
+         const occupationSelect = document.getElementById('Occupation');
+         occupations.forEach(function(occupation) {
+             let option = document.createElement('option');
+             option.value = occupation;
+             option.textContent = occupation;
+             occupationSelect.appendChild(option);
+         });
+
+         // List of loan types
+         const loanTypes = ['Other', 'Credit-Builder Loan',
+    'Credit-Builder Loan, and Mortgage Loan',
+    'Not Specified, and Payday Loan', 'Payday Loan, and Payday Loan',
+    'Payday Loan, and Home Equity Loan', 'Debt Consolidation Loan',
+    'Auto Loan, and Home Equity Loan',
+    'Mortgage Loan, and Payday Loan',
+    'Mortgage Loan, and Not Specified', 'Auto Loan, and Payday Loan',
+    'Personal Loan, and Student Loan',
+    'Payday Loan, and Not Specified',
+    'Home Equity Loan, and Student Loan', 'Auto Loan',
+    'Home Equity Loan', 'Student Loan, and Auto Loan', 'Student Loan',
+    'Mortgage Loan, and Mortgage Loan',
+    'Personal Loan, and Payday Loan',
+    'Payday Loan, and Debt Consolidation Loan',
+    'Auto Loan, and Credit-Builder Loan', 'Personal Loan',
+    'Home Equity Loan, and Not Specified', 'Payday Loan',
+    'Debt Consolidation Loan, and Home Equity Loan',
+    'Mortgage Loan, and Personal Loan',
+    'Mortgage Loan, and Student Loan',
+    'Student Loan, and Mortgage Loan',
+    'Payday Loan, and Credit-Builder Loan',
+    'Credit-Builder Loan, and Personal Loan',
+    'Mortgage Loan, and Home Equity Loan',
+    'Personal Loan, and Mortgage Loan',
+    'Home Equity Loan, and Mortgage Loan',
+    'Debt Consolidation Loan, and Debt Consolidation Loan',
+    'Not Specified, and Mortgage Loan',
+    'Student Loan, and Credit-Builder Loan',
+    'Student Loan, and Student Loan', 'Auto Loan, and Personal Loan',
+    'Credit-Builder Loan, and Not Specified',
+    'Payday Loan, and Auto Loan',
+    'Not Specified, and Debt Consolidation Loan',
+    'Credit-Builder Loan, and Auto Loan', 'Mortgage Loan',
+    'Home Equity Loan, and Credit-Builder Loan',
+    'Student Loan, and Home Equity Loan',
+    'Not Specified, and Auto Loan',
+    'Personal Loan, and Home Equity Loan',
+    'Auto Loan, and Debt Consolidation Loan',
+    'Credit-Builder Loan, and Debt Consolidation Loan',
+    'Personal Loan, and Personal Loan',
+    'Not Specified, and Credit-Builder Loan',
+    'Credit-Builder Loan, and Student Loan',
+    'Mortgage Loan, and Debt Consolidation Loan',
+    'Payday Loan, and Personal Loan',
+    'Personal Loan, and Debt Consolidation Loan',
+    'Student Loan, and Personal Loan',
+    'Debt Consolidation Loan, and Payday Loan',
+    'Auto Loan, and Not Specified', 'Personal Loan, and Not Specified',
+    'Home Equity Loan, and Home Equity Loan',
+    'Personal Loan, and Credit-Builder Loan',
+    'Debt Consolidation Loan, and Mortgage Loan',
+    'Student Loan, and Payday Loan', 'Payday Loan, and Student Loan',
+    'Home Equity Loan, and Debt Consolidation Loan',
+    'Credit-Builder Loan, and Home Equity Loan',
+    'Debt Consolidation Loan, and Not Specified',
+    'Mortgage Loan, and Credit-Builder Loan',
+    'Payday Loan, and Mortgage Loan', 'Auto Loan, and Mortgage Loan' ];
+
+         const loanSelect = document.getElementById('Type_of_Loan');
+         loanTypes.forEach(function(loanType) {
+             let option = document.createElement('option');
+             option.value = loanType;
+             option.textContent = loanType;
+             loanSelect.appendChild(option);
+         });
+     });
+ </script>
+</head>
+<body>
+    <h2>Credit Score Prediction Model</h2>
+    <form action="/predict" method="POST">
+        
+            <label for="Age">Age:</label></td>
+            <input type="number" id="Age" name="Age" required>
+       
+            <label for="Occupation">Occupation:</label>
+            <select id="Occupation" name="Occupation" required></select>
+        
+           <label for="Annual_Income">Annual Income:</label>
+           <input type="number" id="Annual_Income" name="Annual_Income" required>
+       
+            <label for="Num_Bank_Accounts">Number of Bank Accounts:</label>
+            <input type="number" id="Num_Bank_Accounts" name="Num_Bank_Accounts" required>
+        
+            <label for="Num_Credit_Card">Number of Credit Cards:</label>
+            <input type="number" id="Num_Credit_Card" name="Num_Credit_Card" required>
+        
+            <label for="Interest_Rate">Interest Rate:</label>
+            <input type="number" id="Interest_Rate" name="Interest_Rate" required>
+        
+            <label for="Num_of_Loan">Number of Loans:</label>
+            <input type="number" id="Num_of_Loan" name="Num_of_Loan" required>
+        
+            <label for="Type_of_Loan">Type of Loan:</label>
+            <select id="Type_of_Loan" name="Type_of_Loan" required></select>
+        
+            <label for="Delay_from_due_date">Delay from Due Date:</label>
+            <input type="number" id="Delay_from_due_date" name="Delay_from_due_date" required>
+        
+            <label for="Num_of_Delayed_Payment">Number of Delayed Payments:</label>
+            <input type="number" id="Num_of_Delayed_Payment" name="Num_of_Delayed_Payment" required>
+        
+            <label for="Changed_Credit_Limit">Changed Credit Limit:</label>
+           <input type="number" id="Changed_Credit_Limit" name="Changed_Credit_Limit" required>
+        
+            <label for="Num_Credit_Inquiries">Number of Credit Inquiries:</label>
+            <input type="number" id="Num_Credit_Inquiries" name="Num_Credit_Inquiries" required>
+        
+            <label for="Outstanding_Debt">Outstanding Debt:</label>
+            <input type="number" id="Outstanding_Debt" name="Outstanding_Debt" required>
+       
+            <label for="Credit_Utilization_Ratio">Credit Utilization Ratio:</label>
+            <input type="number" id="Credit_Utilization_Ratio" name="Credit_Utilization_Ratio" required>
+        
+            <label for="Credit_History_Age">Credit History Age:</label>
+            <input type="number" id="Credit_History_Age" name="Credit_History_Age" required>
+        
+            <label for="Payment_of_Min_Amount">Payment of Minimum Amount:</label>
+            <select id="Payment_of_Min_Amount" name="Payment_of_Min_Amount" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="NM">NM</option>
+            </select>
+            <label for="Total_EMI_per_month">Total EMI per Month:</label>
+            <input type="number" id="Total_EMI_per_month" name="Total_EMI_per_month" required>
+        
+            <label for="Amount_invested_monthly">Amount Invested Monthly:</label>
+            <input type="number" id="Amount_invested_monthly" name="Amount_invested_monthly" required>
+        
+            <label for="Payment_Behaviour">Payment Behaviour:</label>
+            <select id="Payment_Behaviour" name="Payment_Behaviour" required>
+                <option value="High_spent_Small_value_payments">High Spent, Small Value Payments</option>
+                <option value="Low_spent_Large_value_payments">Low Spent, Large Value Payments</option>
+                <option value="Low_spent_Medium_value_payments">Low Spent, Medium Value Payments</option>
+                <option value="Low_spent_Small_value_payments">Low Spent, Small Value Payments</option>
+                <option value="High_spent_Medium_value_payments">High Spent, Medium Value Payments</option>
+                <option value="High_spent_Large_value_payments">High Spent, Large Value Payments</option>
+            </select>
+        
+            <label for="Monthly_Balance">Monthly Balance:</label>
+            <input type="number" id="Monthly_Balance" name="Monthly_Balance" required>
+            <button type="submit">Predict Credit Score</button>
+    </form>
+</body>
+</html>
